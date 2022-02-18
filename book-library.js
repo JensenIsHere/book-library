@@ -43,8 +43,8 @@ function Book(name, author, pages, read) {
 }
 
 Book.prototype.info = function() {
-  return (this.name + " by " + this.author + "\n" + this.pages + " pages\n" + 
-    (this.read == true ? "Already read" : "Not read yet"));
+  return ("<u>" + this.name + "</u><br>by " + this.author + "<br>" + this.pages 
+  + " pages<br>" + (this.read == true ? "Already read" : "Not read yet"));
 }
 
 Book.prototype.changeReadStatus = function () {
@@ -73,11 +73,11 @@ function printBook(entry, pos) {
   let deleteButton;
   let readButton;
   currentBook = formatListEntry(currentBook, pos)
-  currentBook.innerText = entry.info();
-  deleteButton = addButtonToEntry(deleteButton, "delete", pos, "DELETE");
+  currentBook.innerHTML = ('<p>' + entry.info() + '</p>');
+  deleteButton = addButtonToEntry(deleteButton, "delete", pos, "Delete");
   readButton = addButtonToEntry(readButton, "read", pos, "Read?");
-  currentBook.appendChild(deleteButton);
   currentBook.appendChild(readButton);
+  currentBook.appendChild(deleteButton);
   document.getElementById('book_list').appendChild(currentBook);
 }
 
@@ -93,6 +93,7 @@ function addButtonToEntry(entry, buttonID, pos, buttonText) {
   let newButton;
   let alteredEntry = entry
   alteredEntry = document.createElement('div');
+  alteredEntry.setAttribute('id', buttonID);
   newButton = document.createElement('button');
   newButton.setAttribute('type', 'button');
   newButton.setAttribute('id', buttonID);
@@ -190,8 +191,5 @@ var book2 = new Book('Emergent Design', 'Scott L. Bain', 411, false);
 
 myLibrary.push(book1);
 myLibrary.push(book2);
-
-console.log(myLibrary[0].info());
-console.log(myLibrary[1].info());
 
 printLibraryCards()
