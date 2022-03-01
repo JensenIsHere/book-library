@@ -35,20 +35,23 @@ Original project specs (all complete)
 
 "use strict";
 
-function Book(name, author, pages, read) {
-  this.name = name;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-}
+class Book {
+  constructor(name, author, pages, read) {
+    this.name = name;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  }
+    
+    info() {
+      return ("<u>" + this.name + "</u><br>by " + this.author + "<br>" + 
+      this.pages + " pages<br>" + (this.read == true ? "Already read" 
+      : "Not read yet"));
+    }
 
-Book.prototype.info = function() {
-  return ("<u>" + this.name + "</u><br>by " + this.author + "<br>" + this.pages 
-  + " pages<br>" + (this.read == true ? "Already read" : "Not read yet"));
-}
-
-Book.prototype.changeReadStatus = function () {
-  this.read == true ? this.read = false : this.read = true;
+    changeReadStatus() {
+      this.read == true ? this.read = false : this.read = true;
+    }
 }
 
 function printLibraryCards() {
